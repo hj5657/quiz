@@ -42,6 +42,14 @@ class ItemControllerTest {
                 .andExpect(status().isOk());
     }
     @Test
+    void should_not_add_item_when_exits_this_item()throws Exception{
+        String jsonString = objectMapper.writeValueAsString(item);
+        mockMvc.perform(post("/item").content(jsonString).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+        mockMvc.perform(get("/items")).andExpect(jsonPath("$",hasSize(1)))
+        .andExpect(status().isOk());
+    }
+    @Test
     void should_return_item_list() throws Exception{
         String jsonString = objectMapper.writeValueAsString(item);
         mockMvc.perform(post("/item").content(jsonString).contentType(MediaType.APPLICATION_JSON))

@@ -22,8 +22,12 @@ public class ItemController {
     ItemService itemService;
     @PostMapping("/item")
     public ResponseEntity addItem(@RequestBody @Valid Item item){
-        itemService.save(item);
-        return ResponseEntity.ok().build();
+        boolean isSave=itemService.save(item);
+        if (isSave){
+            return ResponseEntity.ok().build();
+        }else {
+            return ResponseEntity.badRequest().build();
+        }
     }
     @GetMapping("/items")
     public ResponseEntity getItemList(){

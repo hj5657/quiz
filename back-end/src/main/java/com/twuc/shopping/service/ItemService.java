@@ -18,10 +18,15 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
 
-    public void save(Item item) {
+    public boolean save(Item item) {
         ItemPO itemPO = ItemPO.builder().name(item.getName()).num(item.getNum()).price(item.getPrice())
                 .url(item.getUrl()).build();
-        itemRepository.save(itemPO);
+        List<ItemPO> itemPOS=itemRepository.findByName(item.getName());
+        if (itemPOS.size()==0){
+            itemRepository.save(itemPO);
+            return true;
+        }
+        return false;
     }
 
     public List<ItemPO> findAll() {
