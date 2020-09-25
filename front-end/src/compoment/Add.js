@@ -14,8 +14,12 @@ class Add extends React.Component {
       [event.target.name]: event.target.value,
     });
   };
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
+    const respons = await fetch("http://localhost:8080/item", {
+      method: "POST",
+    });
+    console.log(respons);
     console.log(JSON.stringify(this.state));
   };
   render() {

@@ -7,11 +7,20 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Link to="/">商城</Link>
-        <Link to="/">订单</Link>
-        <Link to="/product">添加商品</Link>
+        <div className="head">
+          <Link to="/" className="link">
+            商城
+          </Link>
+          <Link to="/" className="link">
+            订单
+          </Link>
+          <Link to="/product" className="link">
+            添加商品
+          </Link>
+        </div>
+
         <Switch>
-          <Route path="/" component={Shop} />
+          <Route exact path="/" component={Shop} />
           <Route path="/product" component={Add} />
         </Switch>
       </BrowserRouter>
