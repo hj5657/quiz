@@ -1,12 +1,13 @@
-import React from "react";
+import React from 'react';
+import { message } from 'antd';
 class Add extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      price: "",
-      num: "",
-      url: "",
+      name: '',
+      price: '',
+      num: '',
+      url: '',
     };
   }
   handleChange = (event) => {
@@ -14,13 +15,32 @@ class Add extends React.Component {
       [event.target.name]: event.target.value,
     });
   };
-  handleSubmit = async (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
-    const respons = await fetch("http://localhost:8080/item", {
-      method: "POST",
-    });
-    console.log(respons);
-    console.log(JSON.stringify(this.state));
+    fetch('http://localhost:8080/item', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: this.state.name,
+        price: this.state.price,
+        num: this.state.num,
+        url: this.state.url,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((data) => {
+        if (data.status === 400) {
+          return Promise.reject({
+            status: 400,
+          });
+        }
+      })
+      .catch((err) => {
+        if (err.status === 400) {
+          message.error('商品名称已存在，请输入新的商品名称');
+        }
+      });
   };
   render() {
     return (
@@ -28,42 +48,47 @@ class Add extends React.Component {
         <h1>添加商品</h1>
         <form onSubmit={this.handleSubmit}>
           <label>
-            名称：
+            *名称：
             <input
               type="text"
               name="name"
               value={this.state.name}
               onChange={this.handleChange}
+              placeholder="名称"
             />
           </label>
           <label>
-            价格：
+            *价格：
             <input
               type="number"
               name="price"
               value={this.state.price}
               onChange={this.handleChange}
+              placeholder="价格"
             />
           </label>
           <label>
-            单位：
+            *单位：
             <input
               type="text"
               name="num"
               value={this.state.num}
               onChange={this.handleChange}
+              placeholder="单位"
             />
           </label>
           <label>
-            图片：
+            *图片：
             <input
               type="text"
               name="url"
               value={this.state.url}
               onChange={this.handleChange}
+              placeholder="URL"
             />
           </label>
           <input
+            className="submit"
             type="submit"
             disabled={
               !this.state.name ||

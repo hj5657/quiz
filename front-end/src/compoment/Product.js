@@ -6,10 +6,10 @@ class Product extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="product">
         <img src={this.props.url} alt="keleimg" />
         <p>{this.props.name}</p>
-        <p>单价：{this.props.price}</p>
+        <p>单价：{this.props.price}元</p>
       </div>
     );
   }

@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import Product from "./Product";
+import React, { Component } from 'react';
+import Product from './Product';
 class Shop extends Component {
   constructor(props) {
     super(props);
     this.state = {
       goods: [
         {
-          url: "",
-          price: "",
-          name: "",
+          url: '',
+          price: '',
+          name: '',
         },
       ],
     };
   }
   render() {
     return (
-      <div>
+      <div className="content">
         {this.state.goods.map((item) => {
           return (
             <Product
@@ -30,8 +30,8 @@ class Shop extends Component {
     );
   }
   componentDidMount = async () => {
-    const respons = await fetch("http://localhost:8080/items", {
-      method: "GET",
+    const respons = await fetch('http://localhost:8080/items', {
+      method: 'GET',
     });
     const result = await respons.json();
     this.setState({
