@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 class Product extends React.Component {
   constructor(props) {
     super(props);
@@ -7,7 +7,7 @@ class Product extends React.Component {
   render() {
     return (
       <div className="product">
-        <img src={this.props.url} alt="keleimg" />
+        <img src={this.props.url} alt={`${this.props.name}图片`} />
         <p>{this.props.name}</p>
         <p>单价：{this.props.price}元</p>
       </div>

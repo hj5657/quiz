@@ -15,7 +15,7 @@ class Shop extends Component {
   }
   render() {
     return (
-      <div className="content" key="shop">
+      <div className="content">
         {this.state.goods.map((item, index) => {
           return (
             <Product
