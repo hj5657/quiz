@@ -15,14 +15,14 @@ class Shop extends Component {
   }
   render() {
     return (
-      <div className="content">
-        {this.state.goods.map((item) => {
+      <div className="content" key="shop">
+        {this.state.goods.map((item, index) => {
           return (
             <Product
               url={item.url}
               name={item.name}
               price={item.price}
-              key=""
+              key={index}
             />
           );
         })}

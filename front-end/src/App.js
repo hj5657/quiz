@@ -1,12 +1,12 @@
-import React from "react";
-import Shop from "./compoment/Shop";
-import "./App.css";
-import Add from "./compoment/Add";
-import { Link, Switch, BrowserRouter, Route } from "react-router-dom";
+import React from 'react';
+import Shop from './compoment/Shop';
+import './App.css';
+import Add from './compoment/Add';
+import { Link, Switch, BrowserRouter, Route } from 'react-router-dom';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter key="head">
         <div className="head">
           <Link to="/" className="link">
             商城
@@ -19,7 +19,7 @@ function App() {
           </Link>
         </div>
 
-        <Switch>
+        <Switch key="content">
           <Route exact path="/" component={Shop} />
           <Route path="/product" component={Add} />
         </Switch>

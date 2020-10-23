@@ -30,6 +30,14 @@ class Add extends React.Component {
       },
     })
       .then((data) => {
+        if (data.status === 200) {
+          this.setState({
+            name: '',
+            price: '',
+            num: '',
+            url: '',
+          });
+        }
         if (data.status === 400) {
           return Promise.reject({
             status: 400,
