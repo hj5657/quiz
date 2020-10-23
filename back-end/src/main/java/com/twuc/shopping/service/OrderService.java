@@ -25,7 +25,8 @@ public class OrderService {
     }
 
     public void create(Order order) {
-        OrderPO orderPO = OrderPO.builder().items(order.getItems()).totalPrice(0).build();
+        double totalPrice = order.getItems().stream().mapToDouble(item -> item.getPrice() * item.getPrice()).sum();
+        OrderPO orderPO = OrderPO.builder().items(order.getItems()).totalPrice(totalPrice).build();
         orderRepository.save(orderPO);
     }
 }
